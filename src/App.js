@@ -1,6 +1,7 @@
 import React from "react";
-import Todo from "./components/Todo";
+import TodoList from "./components/TodoList";
 import TodoForm from "./components/TodoForm";
+import "./components/Todo.css";
 const Todos = [
   {
     task: "pet sloth",
@@ -25,6 +26,18 @@ class App extends React.Component {
       Todos,
     };
   }
+  addTodo = (e, todo) => {
+    e.preventDefault();
+    const newTodo = {
+      task: todo,
+      id: Date.now() * Math.floor(Math.random()),
+      completed: false,
+    };
+    console.log("id", id);
+    this.setState({
+      Todos: [...this.state.Todos, newTodo],
+    });
+  };
 
   toggleTodo = (todoId) => {
     console.log(todoId);
@@ -40,10 +53,23 @@ class App extends React.Component {
       }),
     });
   };
+
+  clearCompleted = (e) => {
+    e.preventDefault();
+    this.setState({
+      Todos: this.state.Todos.filter((todo) => !todo.completed),
+    });
+  };
   render() {
     return (
       <div>
-        <h2>Welcome to your Todo App!</h2>
+        <h2>Todo List:</h2>
+        <TodoForm addItem={this.addItem} />
+        <TodoList
+          todo={this.state.todo}
+          toggleTodo={this.toggleTodo}
+          clearCompleted={this.clearCompleted}
+        />
       </div>
     );
   }
