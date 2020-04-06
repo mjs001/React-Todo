@@ -2,9 +2,3 @@
 // feel free to change this component.js into TodoList.js
 
 import React from "react";
-class TodoForm extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-}
