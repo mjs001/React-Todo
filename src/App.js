@@ -33,7 +33,7 @@ class App extends React.Component {
       id: Date.now() * Math.floor(Math.random()),
       completed: false,
     };
-    console.log("id", id);
+    console.log(newTodo);
     this.setState({
       Todos: [...this.state.Todos, newTodo],
     });
@@ -64,9 +64,9 @@ class App extends React.Component {
     return (
       <div>
         <h2>Todo List:</h2>
-        <TodoForm addItem={this.addItem} />
+        <TodoForm addTodo={this.addTodo} />
         <TodoList
-          todo={this.state.todo}
+          Todos={this.state.Todos}
           toggleTodo={this.toggleTodo}
           clearCompleted={this.clearCompleted}
         />
