@@ -2,6 +2,7 @@ import React from "react";
 import TodoList from "./components/TodoList";
 import TodoForm from "./components/TodoForm";
 import "./components/Todo.css";
+import SimpleStorage from "react-simple-storage";
 const Todos = [
   {
     task: "pet sloth",
@@ -30,7 +31,7 @@ class App extends React.Component {
     e.preventDefault();
     const newTodo = {
       task: todo,
-      id: Date.now() * Math.floor(Math.random()),
+      id: Date.now() * Math.floor(Math.random() * 2),
       completed: false,
     };
     console.log(newTodo);
@@ -60,10 +61,13 @@ class App extends React.Component {
       Todos: this.state.Todos.filter((todo) => !todo.completed),
     });
   };
+
   render() {
     return (
       <div>
         <h2>Todo List:</h2>
+
+        <SimpleStorage parent={this} key={this.id} />
         <TodoForm addTodo={this.addTodo} />
         <TodoList
           Todos={this.state.Todos}
